@@ -15,12 +15,14 @@ var database = firebase.database();
 
 
 
-database.ref().on("value", function(snapshot) {
+database.ref().on("child_added", function(childSnapshot) {
 
-    var trainName = snapshot.val().name;
-    var destination = snapshot.val().destination;
-    var time = snapshot.val().time;
+    var trainName = childSnapshot.val().name;
+    var destination = childSnapshot.val().destination;
+    console.log(childSnapshot.val().destination);
+    var time = childSnapshot.val().time;
 
+    $('tbody').append('<tr><td>' + trainName + '</td><td>'+destination+'</td><<td>'+time+'</td>/tr>');
 
   }, function(errorObject) {
     console.log("The read failed: " + errorObject.code);
@@ -37,14 +39,14 @@ $(".btn").on("click", function(event) {
 
     // Get inputs
     name = $("#name").val().trim();
-    destintation = $("#destination").val().trim();
+    destination = $("#destination").val().trim();
     time = $("#time").val().trim();
 
 
     // Change what is saved in firebase
-    database.ref().set({
+    database.ref().push({
       name: name,
-      destintation: destintation,
+      destination: destination,
       time: time
     });
 
@@ -52,3 +54,8 @@ $(".btn").on("click", function(event) {
     $('#destination').val("");
     $('#time').val("");
 });
+
+
+
+
+
