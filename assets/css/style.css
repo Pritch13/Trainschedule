@@ -44,3 +44,15 @@ tbody {
 .btn {
     background-color: #d6c87b;
 }
+
+.time {
+    text-align: center;
+    color: #d6c87b;
+    font-size: 30px;
+}
+
+.date {
+    text-align: center;
+    color: #d6c87b;
+    font-size: 30px;
+}
